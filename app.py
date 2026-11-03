@@ -1,7 +1,8 @@
 
 import os
 import re
-import yaml
+import sqlite3
+import json
 import requests
 
 from pathlib import Path
@@ -11,9 +12,63 @@ app = Flask(__name__)
 
 SARVAM_API_KEY = os.environ.get("SARVAM_API_KEY")
 
+# -----------------------------------------
+# 1. DATABASE CONFIGURATION
+# -----------------------------------------
+
+DB_FILE = Path(__file__).parent / "data" / "alar.db"
+
+
+def lookup_alar(word):
+    """Find a Kannada word using SQLite."""
+
+    if not DB_FILE.exists():
+        print("Alar SQLite database not found:", DB_FILE)
+        return None
+
+    try:
+        with sqlite3.connect(
+            f"file:{DB_FILE.as_posix()}?mode=ro",
+            uri=True,
+            timeout=3
+        ) as connection:
+
+            row = connection.execute(
+                "SELECT defs, phone FROM alar WHERE entry = ?",
+                (word.strip(),)
+            ).fetchone()
+
+        if not row:
+            return None
+
+        definitions = json.loads(row[0] or "[]")
+
+        meanings = [
+            item.get("entry", "").strip()
+            for item in definitions[:3]
+            if isinstance(item, dict)
+            and item.get("entry", "").strip()
+        ]
+
+        if not meanings:
+            return None
+
+        return {
+            "english": "; ".join(meanings),
+            "meaning": "Definition from Alar Kannada-English Dictionary.",
+            "pronunciation": row[1] or "Not available",
+            "example": "",
+            "example_pronunciation": "",
+            "example_meaning": "No verified example available."
+        }
+
+    except (sqlite3.Error, json.JSONDecodeError) as error:
+        print("Alar SQLite lookup error:", error)
+        return None
+
 
 # -----------------------------------------
-# 1. LOCAL KANNADA DICTIONARY
+# 2. LOCAL KANNADA DICTIONARY
 # -----------------------------------------
 
 kannada_words = {
@@ -34,65 +89,6 @@ kannada_words = {
         "example_meaning": "Hello, how are you?"
     }
 }
-
-
-# -----------------------------------------
-# 2. LOAD ALAR DICTIONARY
-# -----------------------------------------
-
-ALAR_DATA = {}
-
-alar_file = Path(__file__).parent / "data" / "alar.yml"
-
-if alar_file.exists():
-    try:
-        with open(alar_file, "r", encoding="utf-8") as file:
-            entries = yaml.safe_load(file) or []
-
-        if isinstance(entries, list):
-            ALAR_DATA = {
-                item["entry"].strip(): item
-                for item in entries
-                if isinstance(item, dict) and item.get("entry")
-            }
-
-        print(f"Alar dictionary loaded: {len(ALAR_DATA)} entries")
-
-    except Exception as error:
-        print("Could not load Alar dictionary:", error)
-
-else:
-    print("Alar dictionary file not found:", alar_file)
-
-
-def lookup_alar(word):
-    """Find a Kannada word in the Alar dictionary."""
-
-    entry = ALAR_DATA.get(word.strip())
-
-    if not entry:
-        return None
-
-    definitions = entry.get("defs", [])
-
-    meanings = [
-        definition.get("entry", "").strip()
-        for definition in definitions[:3]
-        if isinstance(definition, dict)
-        and definition.get("entry", "").strip()
-    ]
-
-    if not meanings:
-        return None
-
-    return {
-        "english": "; ".join(meanings),
-        "meaning": "Definition from Alar Kannada-English Dictionary.",
-        "pronunciation": entry.get("phone") or "Not available",
-        "example": "",
-        "example_pronunciation": "",
-        "example_meaning": "No verified example available."
-    }
 
 
 # -----------------------------------------
@@ -221,7 +217,7 @@ def understand():
 
     results = []
 
-    # Avoid looking up duplicate words.
+    # Avoid duplicate lookups.
     for word in dict.fromkeys(words):
 
         # PRIORITY 1: LOCAL DICTIONARY
@@ -235,7 +231,7 @@ def understand():
 
             continue
 
-        # PRIORITY 2: ALAR DICTIONARY
+        # PRIORITY 2: ALAR SQLITE DICTIONARY
         alar_result = lookup_alar(word)
 
         if alar_result:
@@ -253,14 +249,14 @@ def understand():
 
         if translated:
 
-            # Detect results that appear to be transliterations
-            # rather than meaningful English translations.
             is_transliteration = (
                 translated.casefold() == word.casefold()
-                or re.fullmatch(r"[A-Za-z][A-Za-z\s'-]*", translated)
-                and translated.casefold() in {
-                    "maruti", "krishna", "rama", "sita"
-                }
+                or (
+                    re.fullmatch(r"[A-Za-z][A-Za-z\s'-]*", translated)
+                    and translated.casefold() in {
+                        "maruti", "krishna", "rama", "sita"
+                    }
+                )
             )
 
             if is_transliteration:
