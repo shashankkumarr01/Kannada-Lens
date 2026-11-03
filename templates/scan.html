@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scan Kannada | Kannada Lens</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.2/cropper.min.css"
+>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.2/cropper.min.js"></script>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Scan Kannada</h1>
+        <p>Upload a Kannada signboard, bus board, or street image.</p>
+
+        <div class="upload-box">
+            <input type="file" id="imageInput" accept="image/*">
+            <button id="scanButton" onclick="scanImage()">
+                Extract Kannada Text
+            </button>
+        </div>
+
+        <div id="preview">
+    <img id="imageToCrop" style="max-width: 100%; display: none;">
+</div>
+
+<button id="cropButton" onclick="cropImage()" disabled>
+    Crop Selected Text
+</button>
+
+        <h2>Extracted Text</h2>
+        <p id="status">Upload an image to get started.</p>
+        <div id="result">Your extracted Kannada text will appear here.</div>
+    </div>
+
+    <!-- Tesseract OCR library -->
+    <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
+
+    <script src="{{ url_for('static', filename='js/scan.js') }}"></script>
+</body>
+</html>

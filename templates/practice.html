@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Practice Kannada | Kannada Lens</title>
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+    <main class="container">
+        <h1>Practice Kannada</h1>
+        <p>Test how well you remember the words in your Kannada Bank.</p>
+
+        <a href="/">← Back to Dashboard</a>
+
+        <div id="practiceArea">
+            <p id="question">Loading your words...</p>
+
+            <div id="options"></div>
+
+            <p id="feedback"></p>
+
+            <button id="nextButton" style="display: none;">
+                Next Word
+            </button>
+        </div>
+    </main>
+
+    <script src="{{ url_for('static', filename='js/practice.js') }}"></script>
+
+</body>
+</html>

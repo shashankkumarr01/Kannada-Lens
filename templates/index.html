@@ -1,0 +1,124 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kannada Lens | Learn Kannada Naturally</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+<div class="app-container">
+
+    <aside class="sidebar">
+        <div class="logo">
+            <span class="logo-icon">ಕ</span>
+            <h2>Kannada Lens</h2>
+        </div>
+
+        <p class="menu-label">MENU</p>
+
+        <nav>
+            <a href="{{ url_for('home') }}" class="active">⌂ Dashboard</a>
+            <a href="{{ url_for('scan') }}">▣ Scan Kannada</a>
+            <a href="{{ url_for('scan') }}">⌕ Word Explorer</a>
+            <a href="{{ url_for('bank') }}">♡ My Kannada Bank</a>
+            <a href="{{ url_for('practice') }}">◷ Practice Zone</a>
+        </nav>
+
+        <div class="sidebar-bottom">
+            <p>Learn a language.</p>
+            <p>Connect with a culture.</p>
+            <span>ನಮ್ಮ ಕನ್ನಡ ❤️</span>
+        </div>
+    </aside>
+
+    <main class="main-content">
+
+        <header>
+            <div>
+                <p class="greeting">YOUR EVERYDAY KANNADA COMPANION</p>
+                <h1>Namaskara! 👋</h1>
+                <p class="subtitle">
+                    Understand Kannada around you. Learn it for life.
+                </p>
+            </div>
+            <div class="profile">SK</div>
+        </header>
+
+        <section class="hero">
+            <div>
+                <span class="hero-tag">ನಮಸ್ಕಾರ • WELCOME</span>
+                <h2>See it. Understand it.<br>Learn it. Use it.</h2>
+                <p>
+                    Turn everyday Kannada words, signs and conversations
+                    into opportunities to learn.
+                </p>
+                <a href="{{ url_for('scan') }}" class="hero-button">
+                    Start Exploring →
+                </a>
+            </div>
+            <div class="hero-kannada">ಕನ್ನಡ</div>
+        </section>
+
+        <section class="section">
+            <div class="section-heading">
+                <div>
+                    <h2>Explore Kannada</h2>
+                    <p>What would you like to do today?</p>
+                </div>
+            </div>
+
+            <div class="feature-grid">
+
+                <div class="feature-card">
+                    <div class="feature-icon green">▧</div>
+                    <h3>Scan Kannada</h3>
+                    <p>Scan boards, buses and signs to understand Kannada.</p>
+                    <a href="{{ url_for('scan') }}" class="feature-link">Explore →</a>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon orange">⌕</div>
+                    <h3>Word Explorer</h3>
+                    <p>Explore supported Kannada words and their meanings.</p>
+                    <a href="{{ url_for('scan') }}" class="feature-link">Explore →</a>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon purple">♡</div>
+                    <h3>My Kannada Bank</h3>
+                    <p>Save unfamiliar words and build your vocabulary.</p>
+                    <a href="{{ url_for('bank') }}" class="feature-link">Explore →</a>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon blue">♫</div>
+                    <h3>Practice Zone</h3>
+                    <p>Practice Kannada vocabulary using saved words.</p>
+                    <a href="{{ url_for('practice') }}" class="feature-link">Explore →</a>
+                </div>
+
+            </div>
+        </section>
+
+        <section class="daily-card">
+            <div>
+                <span class="hero-tag">WORD OF THE DAY</span>
+                <h2>ನಮಸ್ಕಾರ</h2>
+                <p>Namaskara — Hello / Greetings</p>
+                <p class="example">Example: ನಮಸ್ಕಾರ, ನೀವು ಹೇಗಿದ್ದೀರಿ?</p>
+            </div>
+            <div class="daily-symbol">ಕ</div>
+        </section>
+
+        <footer>
+            Made with ❤️ for Kannada | ಕನ್ನಡ ಕಲಿಯೋಣ
+        </footer>
+
+    </main>
+</div>
+
+</body>
+</html>

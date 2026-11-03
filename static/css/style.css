@@ -1,0 +1,927 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+Kannada:wght@400;500;600;700&display=swap');
+
+/* ========================================
+   GLOBAL THEME
+======================================== */
+
+:root {
+    --primary: #7c3aed;
+    --primary-dark: #5b21b6;
+    --primary-light: #a78bfa;
+    --lavender: #ede9fe;
+    --lavender-soft: #f5f3ff;
+
+    --background: #f8f7fc;
+    --surface: #ffffff;
+    --text: #241b35;
+    --text-muted: #81788f;
+
+    --border: #e9e4f2;
+    --shadow: 0 8px 25px rgba(91, 33, 182, 0.07);
+    --glow: 0 0 24px rgba(124, 58, 237, 0.20);
+
+    --radius: 16px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Inter', 'Noto Sans Kannada', sans-serif;
+    background: var(--background);
+    color: var(--text);
+}
+
+button,
+input {
+    font-family: inherit;
+}
+
+button {
+    transition: all 0.25s ease;
+}
+
+a {
+    transition: all 0.25s ease;
+}
+
+
+/* ========================================
+   MAIN APP LAYOUT
+======================================== */
+
+.app-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+
+/* ========================================
+   TOP NAVIGATION BAR
+======================================== */
+
+.sidebar {
+    width: 100%;
+    min-height: 78px;
+    background: rgba(255, 255, 255, 0.96);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+
+    padding: 12px 5%;
+    border-right: none;
+    border-bottom: 1px solid var(--border);
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+
+    box-shadow: 0 4px 18px rgba(55, 30, 90, 0.04);
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    margin-bottom: 0;
+    flex-shrink: 0;
+}
+
+.logo h2 {
+    font-size: 20px;
+    font-weight: 800;
+    color: var(--text);
+}
+
+.logo-icon {
+    background: linear-gradient(135deg, #7c3aed, #a78bfa);
+    color: white;
+    padding: 9px 13px;
+    border-radius: 12px;
+    font-size: 22px;
+    box-shadow: 0 5px 15px rgba(124, 58, 237, 0.25);
+}
+
+.menu-label {
+    display: none;
+}
+
+nav {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+nav a {
+    text-decoration: none;
+    color: var(--text-muted);
+
+    padding: 11px 16px;
+    border-radius: 10px;
+
+    font-size: 13px;
+    font-weight: 600;
+
+    position: relative;
+}
+
+nav a:hover {
+    color: var(--primary);
+    background: var(--lavender-soft);
+}
+
+nav a.active {
+    background: var(--lavender);
+    color: var(--primary-dark);
+    font-weight: 700;
+}
+
+.sidebar-bottom {
+    display: none;
+}
+
+
+/* ========================================
+   MAIN CONTENT
+======================================== */
+
+.main-content {
+    flex: 1;
+    width: 100%;
+    max-width: 1500px;
+
+    padding: 35px 5%;
+    margin: 0 auto;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.greeting {
+    color: var(--primary);
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    margin-bottom: 12px;
+}
+
+header h1 {
+    font-size: 30px;
+    font-weight: 800;
+}
+
+.subtitle {
+    color: var(--text-muted);
+    margin-top: 8px;
+    font-size: 14px;
+}
+
+.profile {
+    background: linear-gradient(135deg, #7c3aed, #a78bfa);
+    color: white;
+    padding: 13px;
+    border-radius: 50%;
+    font-weight: 700;
+    box-shadow: 0 5px 15px rgba(124, 58, 237, 0.2);
+}
+
+
+/* ========================================
+   HERO SECTION
+======================================== */
+
+.hero {
+    background: linear-gradient(
+        120deg,
+        #4c1d95,
+        #6d28d9,
+        #8b5cf6
+    );
+
+    color: white;
+    border-radius: 22px;
+    padding: 45px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    overflow: hidden;
+    position: relative;
+
+    box-shadow: 0 12px 35px rgba(91, 33, 182, 0.18);
+}
+
+.hero::before {
+    content: "";
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 50%;
+    right: -80px;
+    top: -130px;
+}
+
+.hero-tag {
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    color: #ddd6fe;
+    font-weight: 700;
+}
+
+.hero h2 {
+    font-size: 32px;
+    line-height: 1.4;
+    margin: 18px 0;
+}
+
+.hero p {
+    color: #ede9fe;
+    font-size: 14px;
+    line-height: 1.8;
+    max-width: 450px;
+}
+
+.hero button,
+.hero-button {
+    margin-top: 25px;
+    background: white;
+    color: var(--primary-dark);
+    border: none;
+
+    padding: 13px 22px;
+    border-radius: 10px;
+
+    font-weight: 700;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.hero button:hover,
+.hero-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(255, 255, 255, 0.2);
+}
+
+.hero-kannada {
+    font-family: 'Noto Sans Kannada', sans-serif;
+    font-size: 100px;
+    color: #ffffff25;
+    font-weight: 700;
+    position: relative;
+}
+
+
+/* ========================================
+   DASHBOARD FEATURE CARDS
+======================================== */
+
+.section {
+    margin-top: 40px;
+}
+
+.section-heading h2 {
+    font-size: 21px;
+    font-weight: 800;
+}
+
+.section-heading p {
+    color: var(--text-muted);
+    font-size: 13px;
+    margin-top: 7px;
+}
+
+.feature-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    margin-top: 22px;
+}
+
+.feature-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+
+    padding: 24px 20px;
+
+    position: relative;
+    overflow: hidden;
+
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease,
+        border-color 0.3s ease;
+}
+
+/* Subtle reflection on hover */
+
+.feature-card::before,
+.daily-card::before,
+.word-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -120%;
+
+    width: 70%;
+    height: 100%;
+
+    background: linear-gradient(
+        110deg,
+        transparent,
+        rgba(255, 255, 255, 0.65),
+        transparent
+    );
+
+    transform: skewX(-20deg);
+    transition: left 0.65s ease;
+
+    pointer-events: none;
+    z-index: 1;
+}
+
+.feature-card:hover::before,
+.daily-card:hover::before,
+.word-card:hover::before {
+    left: 150%;
+}
+
+.feature-card:hover {
+    transform: translateY(-7px);
+    border-color: #c4b5fd;
+    box-shadow: var(--glow), var(--shadow);
+}
+
+.feature-icon {
+    width: 44px;
+    height: 44px;
+
+    border-radius: 12px;
+
+    display: grid;
+    place-items: center;
+
+    font-size: 22px;
+    margin-bottom: 18px;
+}
+
+.green {
+    background: #ede9fe;
+    color: #7c3aed;
+}
+
+.orange {
+    background: #fff0df;
+    color: #c17a28;
+}
+
+.purple {
+    background: #ede9fe;
+    color: #7955b6;
+}
+
+.blue {
+    background: #e4f2ff;
+    color: #357bb5;
+}
+
+.feature-card h3 {
+    font-size: 15px;
+    margin-bottom: 10px;
+    font-weight: 700;
+}
+
+.feature-card p {
+    color: var(--text-muted);
+    font-size: 12px;
+    line-height: 1.8;
+    min-height: 60px;
+}
+
+.feature-card button {
+    border: none;
+    background: none;
+    color: var(--primary);
+    font-weight: 700;
+    margin-top: 15px;
+    cursor: pointer;
+}
+
+.feature-card button:hover {
+    color: var(--primary-dark);
+    transform: translateX(3px);
+}
+
+.feature-link {
+    display: inline-block;
+    margin-top: 12px;
+    color: var(--primary);
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.feature-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+}
+
+
+/* ========================================
+   DAILY WORD CARD
+======================================== */
+
+.daily-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+
+    margin-top: 30px;
+    padding: 25px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    position: relative;
+    overflow: hidden;
+
+    transition: 0.3s ease;
+}
+
+.daily-card:hover {
+    transform: translateY(-4px);
+    border-color: #c4b5fd;
+    box-shadow: var(--glow);
+}
+
+.daily-card h2 {
+    font-family: 'Noto Sans Kannada', sans-serif;
+    font-size: 27px;
+    margin-top: 13px;
+    color: var(--primary-dark);
+}
+
+.daily-card p {
+    font-size: 13px;
+    color: var(--text-muted);
+    margin-top: 8px;
+}
+
+.daily-card .example {
+    color: var(--primary);
+}
+
+.daily-symbol {
+    color: #ede9fe;
+    font-size: 75px;
+    font-weight: 700;
+}
+
+
+/* ========================================
+   FOOTER
+======================================== */
+
+footer {
+    text-align: center;
+    color: #a39ab0;
+    font-size: 11px;
+    margin-top: 40px;
+    padding-bottom: 20px;
+}
+
+
+/* ========================================
+   INNER PAGES: SCAN, BANK, PRACTICE
+======================================== */
+
+.container {
+    max-width: 900px;
+    margin: 45px auto;
+    padding: 35px;
+
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+
+    box-shadow: var(--shadow);
+}
+
+.container h1 {
+    font-size: 28px;
+    color: var(--text);
+    margin-bottom: 10px;
+    font-weight: 800;
+}
+
+.container > p {
+    color: var(--text-muted);
+    font-size: 14px;
+    margin-bottom: 25px;
+}
+
+.container > a {
+    display: inline-block;
+    text-decoration: none;
+    color: var(--primary);
+    font-weight: 600;
+    margin-bottom: 25px;
+}
+
+.container > a:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+}
+
+
+/* ========================================
+   BUTTONS
+======================================== */
+
+.container button,
+#cropButton,
+#understandButton,
+#saveWordButton,
+#nextButton {
+    padding: 11px 19px;
+    border: none;
+    border-radius: 9px;
+
+    background: linear-gradient(
+        135deg,
+        var(--primary),
+        #8b5cf6
+    );
+
+    color: white;
+    font-size: 14px;
+    font-weight: 600;
+
+    cursor: pointer;
+    margin-top: 12px;
+
+    transition: all 0.25s ease;
+}
+
+.container button:hover,
+#cropButton:hover,
+#understandButton:hover,
+#saveWordButton:hover,
+#nextButton:hover {
+    background: var(--primary-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 7px 18px rgba(124, 58, 237, 0.22);
+}
+
+.container button:disabled,
+#cropButton:disabled,
+#understandButton:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+
+/* ========================================
+   SCAN PAGE
+======================================== */
+
+.upload-box {
+    margin-top: 25px;
+    padding: 25px;
+
+    border: 2px dashed #c4b5fd;
+    border-radius: 14px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+
+    max-width: 100%;
+    background: var(--lavender-soft);
+}
+
+.upload-box input[type="file"] {
+    padding: 12px;
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 9px;
+}
+
+.upload-box button {
+    padding: 12px 20px;
+    border: none;
+    border-radius: 9px;
+
+    background: var(--primary);
+    color: white;
+
+    cursor: pointer;
+    font-size: 15px;
+}
+
+.upload-box button:hover {
+    background: var(--primary-dark);
+}
+
+.upload-box button:disabled {
+    opacity: 0.6;
+    cursor: wait;
+}
+
+#preview {
+    margin-top: 20px;
+    text-align: center;
+    overflow: hidden;
+    border-radius: 12px;
+}
+
+#status {
+    margin-top: 15px;
+    color: var(--primary);
+    font-size: 14px;
+    font-weight: 600;
+}
+
+#result {
+    margin-top: 12px;
+    padding: 20px;
+
+    min-height: 70px;
+
+    background: var(--lavender-soft);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+
+    color: var(--text);
+    font-family: 'Noto Sans Kannada', sans-serif;
+    font-size: 18px;
+    line-height: 1.8;
+
+    white-space: pre-wrap;
+}
+
+
+/* ========================================
+   WORD BANK
+======================================== */
+
+#wordCount {
+    display: inline-block;
+    padding: 8px 15px;
+
+    background: var(--lavender);
+    color: var(--primary-dark);
+
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 700;
+
+    margin-bottom: 20px;
+}
+
+#wordList {
+    display: grid;
+    gap: 15px;
+}
+
+.word-card {
+    padding: 22px;
+
+    background: #fcfbff;
+    border: 1px solid var(--border);
+    border-radius: 14px;
+
+    position: relative;
+    overflow: hidden;
+
+    transition: 0.3s ease;
+}
+
+.word-card:hover {
+    border-color: #c4b5fd;
+    box-shadow: var(--glow);
+    transform: translateY(-3px);
+}
+
+.word-card h2 {
+    font-family: 'Noto Sans Kannada', sans-serif;
+    color: var(--primary-dark);
+    margin-bottom: 12px;
+}
+
+.word-card p {
+    color: #6f667d;
+    font-size: 14px;
+    margin: 8px 0;
+    line-height: 1.6;
+}
+
+.word-card button {
+    background: #fff0f0;
+    color: #b94040;
+    margin-top: 10px;
+}
+
+.word-card button:hover {
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+
+/* ========================================
+   PRACTICE PAGE
+======================================== */
+
+#practiceArea {
+    margin-top: 25px;
+    padding: 25px;
+
+    background: var(--lavender-soft);
+    border: 1px solid var(--border);
+    border-radius: 15px;
+}
+
+#question {
+    font-size: 18px;
+    line-height: 1.7;
+    margin-bottom: 20px;
+}
+
+#question strong {
+    font-family: 'Noto Sans Kannada', sans-serif;
+    font-size: 25px;
+    color: var(--primary-dark);
+}
+
+#options button {
+    width: 100%;
+    text-align: left;
+
+    background: white;
+    color: var(--text);
+
+    border: 1px solid var(--border);
+    margin: 8px 0;
+}
+
+#options button:hover {
+    border-color: var(--primary);
+    background: var(--lavender);
+    color: var(--primary-dark);
+}
+
+#feedback {
+    margin-top: 18px;
+    font-weight: 700;
+    color: var(--primary);
+}
+
+
+/* ========================================
+   MOBILE RESPONSIVENESS
+======================================== */
+
+@media (max-width: 1000px) {
+
+    .feature-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .sidebar {
+        padding-left: 3%;
+        padding-right: 3%;
+    }
+
+    nav {
+        gap: 3px;
+    }
+
+    nav a {
+        padding: 10px 11px;
+        font-size: 12px;
+    }
+}
+
+
+@media (max-width: 650px) {
+
+    .sidebar {
+        width: 100%;
+        min-height: auto;
+
+        padding: 12px 16px;
+
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+
+    .logo {
+        margin-bottom: 0;
+    }
+
+    nav {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        gap: 5px;
+    }
+
+    nav a {
+        padding: 9px 11px;
+        font-size: 11px;
+    }
+
+    .main-content {
+        padding: 22px 16px;
+    }
+
+    header {
+        gap: 12px;
+    }
+
+    header h1 {
+        font-size: 25px;
+    }
+
+    .hero {
+        padding: 28px 22px;
+    }
+
+    .hero h2 {
+        font-size: 25px;
+    }
+
+    .hero-kannada {
+        display: none;
+    }
+
+    .feature-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .container {
+        margin: 20px 15px;
+        padding: 25px 20px;
+    }
+
+    .container h1 {
+        font-size: 24px;
+    }
+
+    .daily-card {
+        padding: 20px;
+    }
+
+    .daily-symbol {
+        font-size: 48px;
+    }
+}
+
+
+/* ========================================
+   ACCESSIBILITY & MOTION
+======================================== */
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible {
+    outline: 3px solid #c4b5fd;
+    outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+        animation-duration: 0.01ms !important;
+    }
+}

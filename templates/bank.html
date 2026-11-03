@@ -1,0 +1,74 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Kannada Bank | Kannada Lens</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+    <main class="container">
+        <h1>My Kannada Bank</h1>
+        <p>Your personal collection of Kannada words.</p>
+
+        <a href="/">← Back to Dashboard</a>
+
+        <div id="wordCount">Saved Words: 0</div>
+
+        <div id="wordList">
+            <p>No saved words yet. Start by scanning a Kannada word!</p>
+        </div>
+    </main>
+
+    <script>
+        function displayWords() {
+            const words = JSON.parse(localStorage.getItem("kannadaWords")) || [];
+            const wordList = document.getElementById("wordList");
+
+            document.getElementById("wordCount").textContent =
+                "Saved Words: " + words.length;
+
+            if (words.length === 0) {
+                wordList.innerHTML =
+                    "<p>No saved words yet. Start by scanning a Kannada word!</p>";
+                return;
+            }
+
+            wordList.innerHTML = "";
+
+            words.forEach((word, index) => {
+                const card = document.createElement("div");
+                card.className = "word-card";
+
+                const title = document.createElement("h2");
+                title.textContent = word.word;
+
+                const meaning = document.createElement("p");
+                meaning.textContent = "Meaning: " + word.meaning;
+
+                const english = document.createElement("p");
+                english.textContent = "English: " + word.english;
+
+                const removeButton = document.createElement("button");
+                removeButton.textContent = "Remove";
+                removeButton.onclick = () => removeWord(index);
+
+                card.append(title, meaning, english, removeButton);
+                wordList.appendChild(card);
+            });
+        }
+
+        function removeWord(index) {
+            const words = JSON.parse(localStorage.getItem("kannadaWords")) || [];
+            words.splice(index, 1);
+            localStorage.setItem("kannadaWords", JSON.stringify(words));
+            displayWords();
+        }
+
+        displayWords();
+    </script>
+
+</body>
+</html>
